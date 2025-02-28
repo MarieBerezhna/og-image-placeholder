@@ -32,6 +32,7 @@ export default function Home() {
             width={1200}
             height={630}
             className="preview-img"
+            unoptimized
           />
           <p>
             <a href={imageUrl} target="_blank" rel="noopener noreferrer">
