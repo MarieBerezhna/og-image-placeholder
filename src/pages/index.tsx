@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Flex from "@/components/Flex";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
+    <Flex style={{ gap: "1rem" }}>
       <h1>OpenGraph Image Generator</h1>
 
       <input
@@ -41,6 +42,6 @@ export default function Home() {
           </p>
         </div>
       )}
-    </div>
+    </Flex>
   );
 }
