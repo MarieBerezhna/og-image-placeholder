@@ -4,7 +4,6 @@ import Button from "@/components/ui/Button";
 
 export default function Preview({imageUrl}: {imageUrl: string}) {
     return  <Flex style={{ gap: "1rem" }}>
-              <p>Preview:</p>
               <Image
                 src={imageUrl}
                 alt="OG Image Preview"
