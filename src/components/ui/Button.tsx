@@ -1,8 +1,9 @@
+import { Colors } from "@/styles/constants";
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
   background-color: #4CAF50;
-  color: #fff;
+  color: ${Colors.bg};
   padding: 10px 20px;
   border: none;
   border-radius: 5px;

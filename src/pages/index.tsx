@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Image from "next/image";
-import Flex from "@/components/Flex";
-import Button from "@/components/Button";
+import Flex from "@/components/ui/Flex";
+import Button from "@/components/ui/Button";
+import Preview from "@/components/Preview";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -24,27 +24,7 @@ export default function Home() {
       />
 
       <Button onClick={generateImage}>Generate Image</Button>
-
-      {imageUrl && (
-        <Flex style={{ gap: "1rem" }}>
-          <p>Preview:</p>
-          <Image
-            src={imageUrl}
-            alt="OG Image Preview"
-            width={1200}
-            height={630}
-            className="preview-img"
-            unoptimized
-          />
-          
-            <a href={imageUrl} target="_blank" rel="noopener noreferrer">
-            <Button>
-              Open in new tab
-              </Button>
-            </a>
-          
-        </Flex>
-      )}
+      {imageUrl && <Preview imageUrl={imageUrl} />}
     </Flex>
   );
 }
