@@ -10,9 +10,9 @@ export default function Preview({imageUrl}: {imageUrl: string}) {
               src={imageUrl}
               alt="OG Image Preview"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ minHeight: 300, minWidth: 300 }}
               fill
             />
-            
               <a href={imageUrl} target="_blank" rel="noopener noreferrer">
               <Button>
                 Open in new tab
