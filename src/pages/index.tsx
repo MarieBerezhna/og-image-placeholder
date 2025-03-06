@@ -1,8 +1,11 @@
 "use client";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Flex from "@/components/ui/Flex";
-import Button from "@/components/ui/Button";
 import Preview from "@/components/Preview";
+import dynamic from "next/dynamic";
+
+const Button = dynamic(() => import('../components/ui/Button'), { ssr: false });
+const TextInput = dynamic(() => import('../components/ui/Input'), { ssr: false });
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -17,11 +20,10 @@ export default function Home() {
     <Flex style={{ gap: "1rem" }}>
       <h1>OpenGraph Image Generator</h1>
 
-      <input
-        type="text"
+      <TextInput
         placeholder="Enter a title..."
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e: { target: { value: SetStateAction<string>; }; }) => setTitle(e.target.value)}
       />
 
       <Button onClick={generateImage}>Generate Image</Button>
