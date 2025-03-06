@@ -2,7 +2,7 @@
 import { Colors } from "@/styles/constants";
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   background-color: #4CAF50;
   color: ${Colors.bg};
   padding: 10px 20px;
@@ -17,7 +17,3 @@ const StyledButton = styled.button`
     background-color: #3e8e41;
   }
 `;
-
-export default function Button({ children, ...props }: { children: React.ReactNode; [props: string]: unknown }) {
-  return <StyledButton {...props}>{children}</StyledButton>;
-}
