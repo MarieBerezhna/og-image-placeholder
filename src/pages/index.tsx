@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Flex from "@/components/ui/Flex";
 import Button from "@/components/ui/Button";

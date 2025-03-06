@@ -1,16 +1,15 @@
+"use client"
 import Image from "next/image";
 import Flex from "@/components/ui/Flex";
 import Button from "@/components/ui/Button";
-
+import isMobile from "is-mobile";
 export default function Preview({imageUrl}: {imageUrl: string}) {
-    return  <Flex style={{ gap: "1rem" }}>
+    const small = isMobile();
+    return  <Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100: 50}%` }}>
               <Image
                 src={imageUrl}
                 alt="OG Image Preview"
-                width={1200}
-                height={630}
-                className="preview-img"
-                unoptimized
+                fill
               />
               
                 <a href={imageUrl} target="_blank" rel="noopener noreferrer">
