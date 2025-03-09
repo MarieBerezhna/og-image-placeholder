@@ -4,6 +4,8 @@ import { chromium } from "@playwright/test";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const title = (req.query.title as string) || "Default Title";
+    const fontSize = (req.query.fontsize as string) || "60";
+    console.log(fontSize, req.query)
     const browser = await chromium.launch();
     const page = await browser.newPage();
 
@@ -24,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               color: white;
             }
             h1 {
-              font-size: 60px;
+              font-size: ${fontSize}px;
               text-align: center;
             }
           </style>
