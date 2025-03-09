@@ -10,8 +10,9 @@ export const useImageUrl = () => {
 	}, [fontSize, title]);
 
 	useEffect(() => {
+    if (!title.length) return;
 		generateImage();
-	}, [fontSize, generateImage]);
+	}, [fontSize, generateImage, title]);
 
 	return { imageUrl, setImageUrl, title, setTitle, fontSize, setFontSize, generateImage };
 };
