@@ -2,16 +2,16 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { chromium } from "@playwright/test";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const title = (req.query.title as string) || "Default Title";
-    const fontSize = (req.query.fontsize as string) || "60";
-    console.log(fontSize, req.query)
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
+	try {
+		const title = (req.query.title as string) || "Default Title";
+		const fontSize = (req.query.fontsize as string) || "60";
+		console.log(fontSize, req.query);
+		const browser = await chromium.launch();
+		const page = await browser.newPage();
 
-    await page.setViewportSize({ width: 1200, height: 630 });
+		await page.setViewportSize({ width: 1200, height: 630 });
 
-    const htmlContent = `
+		const htmlContent = `
       <html>
         <head>
           <style>
@@ -37,14 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       </html>
     `;
 
-    await page.setContent(htmlContent);
-    const imageBuffer = await page.screenshot();
-    await browser.close();
+		await page.setContent(htmlContent);
+		const imageBuffer = await page.screenshot();
+		await browser.close();
 
-    res.setHeader("Content-Type", "image/png");
-    res.send(imageBuffer);
-  } catch (error) {
-    console.error("Error generating OG image:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+		res.setHeader("Content-Type", "image/png");
+		res.send(imageBuffer);
+	} catch (error) {
+		console.error("Error generating OG image:", error);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
 }
