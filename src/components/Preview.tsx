@@ -5,15 +5,26 @@ import { SetStateAction } from "react";
 import Button from "./ui/Button";
 import Image from "next/image";
 import isMobile from "is-mobile";
+import PopoverPicker from "./PopoverPicker";
 
 type Event = { key: string; preventDefault: () => void; target: { value: SetStateAction<string> } };
 
 export default function Preview() {
-	const { fontSize, setFontSize, title, setTitle, imageUrl } = useImageUrl();
+	const {
+		fontSize,
+		setFontSize,
+		title,
+		setTitle,
+		imageUrl,
+		color,
+		setColor,
+		bgcolor,
+		setBgolor,
+	} = useImageUrl();
 	const small = isMobile();
 
 	return (
-		<Flex style={{ position: "static", width: "100%", gap: "1rem" }}>
+		<Flex style={{ position: "static", width: "100%", height: "100vh", gap: "1rem" }}>
 			<Flex style={{ flexDirection: "row" }}>
 				<TextInput
 					type="text"
@@ -39,10 +50,14 @@ export default function Preview() {
 					value={fontSize}
 					onChange={(e: { target: { value: number } }) => setFontSize(e.target.value)}
 				/>
+				Text Color
+				<PopoverPicker color={color} onChange={setColor} />
+				Background Color
+				<PopoverPicker color={bgcolor} onChange={setBgolor} />
 			</Flex>
-            {/* TODO: optimize api call and show loader */}
-            {/* {loading && <p>Loading...</p>}   */}
-			{imageUrl &&  (
+			{/* TODO: optimize api call and show loader */}
+			{/* {loading && <p>Loading...</p>}   */}
+			{imageUrl && (
 				<>
 					<Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100 : 50}%` }}>
 						<Image
