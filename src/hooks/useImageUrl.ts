@@ -17,7 +17,6 @@ export const useImageUrl = () => {
 			setImageUrl(
 				`/api/og?title=${encodedTitle}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}&width=${width}&height=${height}`
 			);
-			setLoading(false);
 		}, 1000),
 		[title, fontSize, color, bgcolor, width, height]
 	);
@@ -26,7 +25,7 @@ export const useImageUrl = () => {
 		if (!title.length) return;
 		generateImage.flush();
 		setLoading(true);
-
+		setImageUrl(null);
 		const [
 			encodedTitle,
 			encodedFontSize,
@@ -49,6 +48,7 @@ export const useImageUrl = () => {
 	return {
 		imageUrl,
 		loading,
+		setLoading,
 		title,
 		setTitle,
 		fontSize,

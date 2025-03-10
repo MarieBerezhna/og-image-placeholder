@@ -15,6 +15,7 @@ export default function Preview() {
 	const {
 		imageUrl,
 		loading,
+		setLoading,
 		title,
 		setTitle,
 		fontSize,
@@ -111,7 +112,7 @@ export default function Preview() {
 				</Flex>
 			</StyledSideForm>
 			{loading && <Spinner />}
-			{!loading && imageUrl && (
+			{imageUrl && (
 				<>
 					<Flex style={{ gap: "1rem" }}>
 						<Image
@@ -120,6 +121,7 @@ export default function Preview() {
 							style={{ minHeight: 300, minWidth: 300 }}
 							width={small ? 300 : width || 1200}
 							height={small ? 300 : height}
+							onLoad={() => setLoading(false)}
 						/>
 						{small && (
 							<p>
