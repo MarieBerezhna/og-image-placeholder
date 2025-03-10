@@ -1,8 +1,7 @@
-"use client";
-// import { Colors } from "@/styles/constants";
 import styled from "styled-components";
 
 export const StyledInput = styled.input`
+	width: 100%;
 	background-color: #333;
 	color: #fff;
 	padding: 10px;

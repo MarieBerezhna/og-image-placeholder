@@ -8,13 +8,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			fontsize: fontSize = "60",
 			color = "#fff",
 			bgcolor = "#1e1e1e",
+			width = "1200",
+			height = "630",
 		} = req.query as Record<string, string>;
 
-		console.log(fontSize, req.query);
 		const browser = await chromium.launch();
 		const page = await browser.newPage();
 
-		await page.setViewportSize({ width: 1200, height: 630 });
+		await page.setViewportSize({ width: parseInt(width), height: parseInt(height) });
 
 		const htmlContent = `
       <html>

@@ -8,32 +8,47 @@ export const useImageUrl = () => {
 	const [color, setColor] = useState("#fff");
 	const [bgcolor, setBgolor] = useState("#1e1e1e");
 	const [loading, setLoading] = useState(false);
+	const [width, setWidth] = useState<number>(1200);
+	const [height, setHeight] = useState<number>(630);
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const generateImage = useCallback(
-		debounce((encodedTitle, fontSize, color, bgcolor) => {
+		debounce((encodedTitle, fontSize, color, bgcolor, width, height) => {
 			setImageUrl(
-				`/api/og?title=${encodedTitle}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}`
+				`/api/og?title=${encodedTitle}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}&width=${width}&height=${height}`
 			);
 			setLoading(false);
-		}, 800),
-		[title, fontSize, color, bgcolor]
+		}, 1000),
+		[title, fontSize, color, bgcolor, width, height]
 	);
 
 	useEffect(() => {
 		if (!title.length) return;
+		generateImage.flush();
 		setLoading(true);
-		const [encodedTitle, encodedFontSize, encodedColor, encodedBgcolor] = [
-			title,
-			fontSize,
-			color,
-			bgcolor,
-		].map(encodeURIComponent);
-		generateImage(encodedTitle, encodedFontSize, encodedColor, encodedBgcolor);
-	}, [generateImage, title, fontSize, color, bgcolor]);
+
+		const [
+			encodedTitle,
+			encodedFontSize,
+			encodedColor,
+			encodedBgcolor,
+			encodedWidth,
+			encodedHeight,
+		] = [title, fontSize, color, bgcolor, width, height].map(encodeURIComponent);
+
+		generateImage(
+			encodedTitle,
+			encodedFontSize,
+			encodedColor,
+			encodedBgcolor,
+			encodedWidth,
+			encodedHeight
+		);
+	}, [generateImage, title, fontSize, color, bgcolor, width, height]);
 
 	return {
 		imageUrl,
-		setImageUrl,
+		loading,
 		title,
 		setTitle,
 		fontSize,
@@ -42,6 +57,9 @@ export const useImageUrl = () => {
 		setColor,
 		bgcolor,
 		setBgolor,
-		loading,
+		width,
+		setWidth,
+		height,
+		setHeight,
 	};
 };

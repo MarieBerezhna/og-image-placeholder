@@ -7,7 +7,7 @@ const Preview = dynamic(() => import("../components/Preview"), { ssr: false });
 export default function Home() {
 	return (
 		<Flex style={{ gap: "1rem", margin: "2rem" }}>
-			<h1>OpenGraph Image Generator</h1>
+			<h1 style={{ textAlign: "center" }}>OpenGraph Image Generator</h1>
 			<Preview />
 		</Flex>
 	);

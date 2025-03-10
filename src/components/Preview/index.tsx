@@ -13,16 +13,20 @@ type Event = { key: string; preventDefault: () => void; target: { value: SetStat
 
 export default function Preview() {
 	const {
-		fontSize,
-		setFontSize,
+		imageUrl,
+		loading,
 		title,
 		setTitle,
-		imageUrl,
+		fontSize,
+		setFontSize,
 		color,
 		setColor,
 		bgcolor,
 		setBgolor,
-		loading,
+		width,
+		setWidth,
+		height,
+		setHeight,
 	} = useImageUrl();
 	const small = isMobile();
 
@@ -38,6 +42,22 @@ export default function Preview() {
 				/>
 			</Flex>
 			<StyledSideForm>
+				Width:
+				<TextInput
+					type="number"
+					min="300"
+					max="2000"
+					value={width}
+					onChange={(e: { target: { value: number } }) => setWidth(e.target.value)}
+				/>
+				Height:
+				<TextInput
+					type="number"
+					min="300"
+					max="2000"
+					value={height}
+					onChange={(e: { target: { value: number } }) => setHeight(e.target.value)}
+				/>
 				Font Size:
 				<TextInput
 					type="number"
@@ -54,14 +74,20 @@ export default function Preview() {
 			{loading && <Spinner />}
 			{!loading && imageUrl && (
 				<>
-					<Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100 : 50}%` }}>
+					<Flex style={{ gap: "1rem" }}>
 						<Image
 							src={imageUrl}
 							alt="OG Image Preview"
-							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 							style={{ minHeight: 300, minWidth: 300 }}
-							fill
+							width={small ? 300 : width}
+							height={small ? 300 : height}
 						/>
+						{small && (
+							<p>
+								The image will be shown at 300x300. <br />
+								For best preview, use a larger screen
+							</p>
+						)}
 					</Flex>
 					<a href={imageUrl} target="_blank" rel="noopener noreferrer">
 						<Button>Open in new tab</Button>
