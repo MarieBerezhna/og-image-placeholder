@@ -17,7 +17,7 @@ export const StyledSideForm = styled.div`
 	align-items: flex-start;
 	top: 0;
 	right: 0;
-	gap: 2rem;
+	gap: 1.5rem;
 	z-index: 1;
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 50px;
