@@ -8,6 +8,7 @@ import isMobile from "is-mobile";
 import PopoverPicker from "../PopoverPicker";
 import { StyledPreviewContainer, StyledSideForm } from "./Preview.style";
 import Spinner from "../ui/Spinner";
+import { fonts } from "@/constants";
 
 type Event = { key: string; preventDefault: () => void; target: { value: SetStateAction<string> } };
 
@@ -18,6 +19,8 @@ export default function Preview() {
 		setLoading,
 		title,
 		setTitle,
+		fontFamily,
+		setFontFamily,
 		fontSize,
 		setFontSize,
 		color,
@@ -63,7 +66,7 @@ export default function Preview() {
 			</Flex>
 			<StyledSideForm>
 				<h2>Settings</h2>
-				Width:
+				<label>Width:</label>
 				<Flex style={inputRowStyle}>
 					<span>{width}</span>
 					<input
@@ -75,7 +78,7 @@ export default function Preview() {
 						}}
 					/>
 				</Flex>
-				Height:
+				<label>Height:</label>
 				<Flex style={inputRowStyle}>
 					<span>{height}</span>
 					<input
@@ -87,7 +90,19 @@ export default function Preview() {
 						}}
 					/>
 				</Flex>
-				Font Size:
+				<label>Font Family</label>
+				<select
+					value={fontFamily}
+					onChange={e => setFontFamily(e.target.value)}
+					style={{ width: "100%", padding: "0.5rem", borderRadius: "5px" }}
+				>
+					{fonts.map(font => (
+						<option key={font.value} value={font.value}>
+							{font.label}
+						</option>
+					))}
+				</select>
+				<label>Font Size:</label>
 				<Flex style={inputRowStyle}>
 					<span>{fontSize}</span>
 					<input
@@ -104,11 +119,11 @@ export default function Preview() {
 				</Flex>
 				<Flex style={colorInputRowStyle}>
 					<PopoverPicker color={color} onChange={setColor} />
-					Text Color
+					<label>Text Color</label>
 				</Flex>
 				<Flex style={colorInputRowStyle}>
 					<PopoverPicker color={bgcolor} onChange={setBgolor} />
-					Background Color
+					<label>Background Color</label>
 				</Flex>
 			</StyledSideForm>
 			{loading && <Spinner />}

@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { chromium } from "@playwright/test";
-
+import { fonts } from "@/constants";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const {
 			title = "Default Title",
+			fontFamily = fonts[0].value,
 			fontsize: fontSize = "60",
 			color = "#fff",
 			bgcolor = "#1e1e1e",
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         <head>
           <style>
             body {
-              font-family: sans-serif;
+              font-family: ${fontFamily}, sans-serif;
               display: flex;
               align-items: center;
               justify-content: center;

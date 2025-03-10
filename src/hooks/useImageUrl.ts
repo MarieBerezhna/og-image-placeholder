@@ -3,6 +3,7 @@ import { debounce } from "lodash";
 
 export const useImageUrl = () => {
 	const [title, setTitle] = useState("");
+	const [fontFamily, setFontFamily] = useState("Arial");
 	const [fontSize, setFontSize] = useState<number>(60);
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [color, setColor] = useState("#fff");
@@ -13,9 +14,9 @@ export const useImageUrl = () => {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const generateImage = useCallback(
-		debounce((encodedTitle, fontSize, color, bgcolor, width, height) => {
+		debounce((encodedTitle, fontFamily, fontSize, color, bgcolor, width, height) => {
 			setImageUrl(
-				`/api/og?title=${encodedTitle}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}&width=${width}&height=${height}`
+				`/api/og?title=${encodedTitle}&fontFamily=${fontFamily}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}&width=${width}&height=${height}`
 			);
 		}, 1000),
 		[title, fontSize, color, bgcolor, width, height]
@@ -28,22 +29,24 @@ export const useImageUrl = () => {
 		setImageUrl(null);
 		const [
 			encodedTitle,
+			encodedFontFamily,
 			encodedFontSize,
 			encodedColor,
 			encodedBgcolor,
 			encodedWidth,
 			encodedHeight,
-		] = [title, fontSize, color, bgcolor, width, height].map(encodeURIComponent);
+		] = [title, fontFamily, fontSize, color, bgcolor, width, height].map(encodeURIComponent);
 
 		generateImage(
 			encodedTitle,
+			encodedFontFamily,
 			encodedFontSize,
 			encodedColor,
 			encodedBgcolor,
 			encodedWidth,
 			encodedHeight
 		);
-	}, [generateImage, title, fontSize, color, bgcolor, width, height]);
+	}, [generateImage, title, fontFamily, fontSize, color, bgcolor, width, height]);
 
 	return {
 		imageUrl,
@@ -51,6 +54,8 @@ export const useImageUrl = () => {
 		setLoading,
 		title,
 		setTitle,
+		fontFamily,
+		setFontFamily,
 		fontSize,
 		setFontSize,
 		color,
