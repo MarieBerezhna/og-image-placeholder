@@ -21,6 +21,7 @@ export default function Preview() {
 		setColor,
 		bgcolor,
 		setBgolor,
+		loading
 	} = useImageUrl();
 	const small = isMobile();
 
@@ -50,8 +51,8 @@ export default function Preview() {
 				<PopoverPicker color={bgcolor} onChange={setBgolor} />
 			</StyledSideForm>
 			{/* TODO: optimize api call and show loader */}
-			{/* {loading && <p>Loading...</p>}   */}
-			{imageUrl && (
+			{loading && <p>Loading...</p>}  
+			{!loading && imageUrl && (
 				<>
 					<Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100 : 50}%` }}>
 						<Image

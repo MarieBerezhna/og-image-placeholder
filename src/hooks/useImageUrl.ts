@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { debounce } from "lodash";
 
 export const useImageUrl = () => {
 	const [title, setTitle] = useState("");
@@ -6,19 +7,25 @@ export const useImageUrl = () => {
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [color, setColor] = useState("#fff");
 	const [bgcolor, setBgolor] = useState("#1e1e1e");
-	const generateImage = useCallback(() => {
-		const encodedTitle = encodeURIComponent(title);
-		setImageUrl(`/api/og?title=${encodedTitle}&fontsize=${fontSize}`);
-	}, [fontSize, title]);
+	const [ loading, setLoading ] = useState(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const generateImage = useCallback(
+		debounce((encodedTitle, fontSize, color, bgcolor) => {
+		  setImageUrl(`/api/og?title=${encodedTitle}&fontsize=${fontSize}&color=${color}&bgcolor=${bgcolor}`);
+		  setLoading(false);
+		}, 800),
+		[title, fontSize, color, bgcolor]
+	  );
 
 	useEffect(() => {
 		if (!title.length) return;
-		generateImage();
-	}, [fontSize, generateImage, title]);
+		setLoading(true);
+		const encodedTitle = encodeURIComponent(title);
+		generateImage(encodedTitle, fontSize, color, bgcolor);
+	}, [generateImage, title, fontSize, color, bgcolor]);
 
 	return {
 		imageUrl,
-		generateImage,
 		setImageUrl,
 		title,
 		setTitle,
@@ -28,5 +35,6 @@ export const useImageUrl = () => {
 		setColor,
 		bgcolor,
 		setBgolor,
+		loading
 	};
 };
