@@ -7,6 +7,7 @@ import Image from "next/image";
 import isMobile from "is-mobile";
 import PopoverPicker from "../PopoverPicker";
 import { StyledPreviewContainer, StyledSideForm } from "./Preview.style";
+import Spinner from "../ui/Spinner";
 
 type Event = { key: string; preventDefault: () => void; target: { value: SetStateAction<string> } };
 
@@ -50,11 +51,12 @@ export default function Preview() {
 				Background Color
 				<PopoverPicker color={bgcolor} onChange={setBgolor} />
 			</StyledSideForm>
-			{/* TODO: optimize api call and show loader */}
-			{loading && <p>Loading...</p>}  
+			{loading && <Spinner />}  
 			{!loading && imageUrl && (
 				<>
 					<Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100 : 50}%` }}>
+
+
 						<Image
 							src={imageUrl}
 							alt="OG Image Preview"
