@@ -1,11 +1,12 @@
 import { useImageUrl } from "@/hooks/useImageUrl";
-import Flex from "./ui/Flex";
-import TextInput from "./ui/Input";
+import Flex from "../ui/Flex";
+import TextInput from "../ui/Input";
 import { SetStateAction } from "react";
-import Button from "./ui/Button";
+import Button from "../ui/Button";
 import Image from "next/image";
 import isMobile from "is-mobile";
-import PopoverPicker from "./PopoverPicker";
+import PopoverPicker from "../PopoverPicker";
+import { StyledPreviewContainer, StyledSideForm } from "./Preview.style";
 
 type Event = { key: string; preventDefault: () => void; target: { value: SetStateAction<string> } };
 
@@ -24,7 +25,7 @@ export default function Preview() {
 	const small = isMobile();
 
 	return (
-		<Flex style={{ position: "static", width: "100%", height: "100vh", gap: "1rem" }}>
+		<StyledPreviewContainer>
 			<Flex style={{ flexDirection: "row" }}>
 				<TextInput
 					type="text"
@@ -34,14 +35,7 @@ export default function Preview() {
 					onKeyDown={(e: Event) => e.key === "Enter" && setTitle(e.target.value)}
 				/>
 			</Flex>
-			<Flex
-				style={{
-					position: "absolute",
-					top: 0,
-					right: 0,
-					zIndex: 1,
-				}}
-			>
+			<StyledSideForm>
 				Font Size:
 				<TextInput
 					type="number"
@@ -54,7 +48,7 @@ export default function Preview() {
 				<PopoverPicker color={color} onChange={setColor} />
 				Background Color
 				<PopoverPicker color={bgcolor} onChange={setBgolor} />
-			</Flex>
+			</StyledSideForm>
 			{/* TODO: optimize api call and show loader */}
 			{/* {loading && <p>Loading...</p>}   */}
 			{imageUrl && (
@@ -73,6 +67,6 @@ export default function Preview() {
 					</a>
 				</>
 			)}
-		</Flex>
+		</StyledPreviewContainer>
 	);
 }
