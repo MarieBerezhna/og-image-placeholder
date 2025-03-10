@@ -7,7 +7,7 @@ export const StyledPreviewContainer = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 100%;
-	min-height: 50vh;
+	min-height: 80vh;
 	gap: 1rem;
 `;
 
@@ -17,7 +17,10 @@ export const StyledSideForm = styled.div`
 	align-items: flex-start;
 	top: 0;
 	right: 0;
-	gap: 1rem;
+	gap: 2rem;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 50px;
 
 	@media (min-width: 1200px) {
 		position: absolute;

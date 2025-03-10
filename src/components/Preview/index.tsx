@@ -1,7 +1,7 @@
 import { useImageUrl } from "@/hooks/useImageUrl";
 import Flex from "../ui/Flex";
 import TextInput from "../ui/Input";
-import { SetStateAction } from "react";
+import { CSSProperties, SetStateAction } from "react";
 import Button from "../ui/Button";
 import Image from "next/image";
 import isMobile from "is-mobile";
@@ -30,6 +30,25 @@ export default function Preview() {
 	} = useImageUrl();
 	const small = isMobile();
 
+	const sizeInputsProps = {
+		type: "range",
+		min: 300,
+		max: 1500,
+		step: 1,
+	};
+
+	const inputRowStyle: CSSProperties = {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: "0.5rem",
+		width: "100%",
+		justifyContent: "space-between",
+	};
+
+	const colorInputRowStyle: CSSProperties = {
+		...inputRowStyle,
+		justifyContent: "flex-start",
+	};
 	return (
 		<StyledPreviewContainer>
 			<Flex style={{ flexDirection: "row" }}>
@@ -42,34 +61,54 @@ export default function Preview() {
 				/>
 			</Flex>
 			<StyledSideForm>
+				<h2>Settings</h2>
 				Width:
-				<TextInput
-					type="number"
-					min="300"
-					max="2000"
-					value={width}
-					onChange={(e: { target: { value: number } }) => setWidth(e.target.value)}
-				/>
+				<Flex style={inputRowStyle}>
+					<span>{width}</span>
+					<input
+						{...sizeInputsProps}
+						value={width}
+						onChange={e => {
+							const value = parseInt(e.target.value);
+							setWidth(value);
+						}}
+					/>
+				</Flex>
 				Height:
-				<TextInput
-					type="number"
-					min="300"
-					max="2000"
-					value={height}
-					onChange={(e: { target: { value: number } }) => setHeight(e.target.value)}
-				/>
+				<Flex style={inputRowStyle}>
+					<span>{height}</span>
+					<input
+						{...sizeInputsProps}
+						value={height}
+						onChange={e => {
+							const value = parseInt(e.target.value);
+							setHeight(value);
+						}}
+					/>
+				</Flex>
 				Font Size:
-				<TextInput
-					type="number"
-					max="100"
-					placeholder="60"
-					value={fontSize}
-					onChange={(e: { target: { value: number } }) => setFontSize(e.target.value)}
-				/>
-				Text Color
-				<PopoverPicker color={color} onChange={setColor} />
-				Background Color
-				<PopoverPicker color={bgcolor} onChange={setBgolor} />
+				<Flex style={inputRowStyle}>
+					<span>{fontSize}</span>
+					<input
+						value={fontSize}
+						type="range"
+						min={18}
+						max={140}
+						step={1}
+						onChange={e => {
+							const value = parseInt(e.target.value);
+							setFontSize(value);
+						}}
+					/>
+				</Flex>
+				<Flex style={colorInputRowStyle}>
+					<PopoverPicker color={color} onChange={setColor} />
+					Text Color
+				</Flex>
+				<Flex style={colorInputRowStyle}>
+					<PopoverPicker color={bgcolor} onChange={setBgolor} />
+					Background Color
+				</Flex>
 			</StyledSideForm>
 			{loading && <Spinner />}
 			{!loading && imageUrl && (
@@ -79,7 +118,7 @@ export default function Preview() {
 							src={imageUrl}
 							alt="OG Image Preview"
 							style={{ minHeight: 300, minWidth: 300 }}
-							width={small ? 300 : width}
+							width={small ? 300 : width || 1200}
 							height={small ? 300 : height}
 						/>
 						{small && (
