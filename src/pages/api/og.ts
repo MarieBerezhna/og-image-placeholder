@@ -3,8 +3,13 @@ import { chromium } from "@playwright/test";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const title = (req.query.title as string) || "Default Title";
-		const fontSize = (req.query.fontsize as string) || "60";
+		const {
+			title = "Default Title",
+			fontsize: fontSize = "60",
+			color = "#fff",
+			bgcolor = "#1e1e1e",
+		} = req.query as Record<string, string>;
+
 		console.log(fontSize, req.query);
 		const browser = await chromium.launch();
 		const page = await browser.newPage();
@@ -22,8 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               justify-content: center;
               width: 100vw;
               height: 100vh;
-              background: #1e1e1e;
-              color: white;
+              background: ${bgcolor};
+              color: ${color};
             }
             h1 {
               font-size: ${fontSize}px;

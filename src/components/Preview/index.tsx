@@ -22,7 +22,7 @@ export default function Preview() {
 		setColor,
 		bgcolor,
 		setBgolor,
-		loading
+		loading,
 	} = useImageUrl();
 	const small = isMobile();
 
@@ -51,12 +51,10 @@ export default function Preview() {
 				Background Color
 				<PopoverPicker color={bgcolor} onChange={setBgolor} />
 			</StyledSideForm>
-			{loading && <Spinner />}  
+			{loading && <Spinner />}
 			{!loading && imageUrl && (
 				<>
 					<Flex style={{ gap: "1rem", height: "60vh", width: `${small ? 100 : 50}%` }}>
-
-
 						<Image
 							src={imageUrl}
 							alt="OG Image Preview"
