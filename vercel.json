@@ -1,6 +1,0 @@
-{
-    "env": {
-      "PLAYWRIGHT_BROWSERS_PATH": "0",
-      "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "false"
-    }
-  }
