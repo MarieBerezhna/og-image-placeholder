@@ -149,7 +149,6 @@ export default function Preview() {
 						<Flex
 							style={{
 								alignItems: "flex-start",
-								justifyContent: "space-between",
 								gap: "1rem",
 							}}
 						>

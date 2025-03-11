@@ -12,7 +12,14 @@ export default function ClipboardLink({ href }: { href: string }) {
 	};
 
 	return (
-		<Flex style={{ flexDirection: "row", gap: "0.5rem", justifyContent: "space-between" }}>
+		<Flex
+			style={{
+				flexDirection: "row",
+				gap: "0.5rem",
+				justifyContent: "space-between",
+				width: "100%",
+			}}
+		>
 			<pre>
 				<code>{href}</code>
 			</pre>
