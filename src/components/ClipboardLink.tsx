@@ -3,8 +3,9 @@ import Button from "./ui/Button";
 import Flex from "./ui/Flex";
 
 export default function ClipboardLink({ href }: { href: string }) {
+	const defaultText = "Copy";
 	const [title, setTitle] = useState("Copy to clipboard");
-	const [text, setText] = useState("Copy");
+	const [text, setText] = useState(defaultText);
 	const onCopy = () => {
 		navigator.clipboard.writeText(href);
 		setTitle("Copied to clipboard");
@@ -24,6 +25,7 @@ export default function ClipboardLink({ href }: { href: string }) {
 				<code>{href}</code>
 			</pre>
 			<Button onClick={onCopy} title={title}>
+				{text !== defaultText && <span>&#10003;</span>}
 				{text}
 			</Button>
 		</Flex>
