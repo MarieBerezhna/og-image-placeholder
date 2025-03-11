@@ -2,13 +2,13 @@ import { useImageUrl } from "@/hooks/useImageUrl";
 import Flex from "../ui/Flex";
 import TextInput from "../ui/Input";
 import { CSSProperties, SetStateAction } from "react";
-import Button from "../ui/Button";
 import Image from "next/image";
 import isMobile from "is-mobile";
 import PopoverPicker from "../PopoverPicker";
 import { StyledPreviewContainer, StyledSideForm } from "./Preview.style";
 import Spinner from "../ui/Spinner";
 import { fonts } from "@/constants";
+import ClipboardLink from "../ClipboardLink";
 
 type Event = { key: string; preventDefault: () => void; target: { value: SetStateAction<string> } };
 
@@ -145,9 +145,20 @@ export default function Preview() {
 							</p>
 						)}
 					</Flex>
-					<a href={imageUrl} target="_blank" rel="noopener noreferrer">
-						<Button>Open in new tab</Button>
-					</a>
+					{!loading && (
+						<Flex
+							style={{
+								alignItems: "flex-start",
+								justifyContent: "space-between",
+								gap: "1rem",
+							}}
+						>
+							<ClipboardLink href={`${location.origin}${imageUrl}`} />
+							<ClipboardLink
+								href={`<meta property="og:image" content="${location.origin}${imageUrl}" />`}
+							/>
+						</Flex>
+					)}
 				</>
 			)}
 		</StyledPreviewContainer>
