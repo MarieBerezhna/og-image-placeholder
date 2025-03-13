@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=20.0.0"
+    "node": "20.18.1"
   },
   "name": "og-placeholder",
   "version": "0.1.0",
