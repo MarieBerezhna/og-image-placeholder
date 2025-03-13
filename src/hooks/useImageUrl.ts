@@ -7,7 +7,7 @@ export const useImageUrl = () => {
 	const [fontSize, setFontSize] = useState<number>(60);
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [color, setColor] = useState("#fff");
-	const [bgcolor, setBgolor] = useState("#1e1e1e");
+	const [bgcolor, setBgColor] = useState("#1e1e1e");
 	const [loading, setLoading] = useState(false);
 	const [width, setWidth] = useState<number>(1200);
 	const [height, setHeight] = useState<number>(630);
@@ -61,7 +61,7 @@ export const useImageUrl = () => {
 		color,
 		setColor,
 		bgcolor,
-		setBgolor,
+		setBgColor,
 		width,
 		setWidth,
 		height,

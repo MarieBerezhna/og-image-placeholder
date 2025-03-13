@@ -26,7 +26,7 @@ export default function Preview() {
 		color,
 		setColor,
 		bgcolor,
-		setBgolor,
+		setBgColor,
 		width,
 		setWidth,
 		height,
@@ -122,7 +122,7 @@ export default function Preview() {
 					<label>Text Color</label>
 				</Flex>
 				<Flex style={colorInputRowStyle}>
-					<PopoverPicker color={bgcolor} onChange={setBgolor} />
+					<PopoverPicker color={bgcolor} onChange={setBgColor} />
 					<label>Background Color</label>
 				</Flex>
 			</StyledSideForm>
