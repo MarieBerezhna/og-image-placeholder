@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx playwright install & next build",
     "format": "dprint fmt",
     "start": "next start",
     "lint": "next lint",
